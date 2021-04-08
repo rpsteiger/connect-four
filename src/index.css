@@ -51,11 +51,7 @@ body {
   .kbd-navigation .square:focus {
     background: #ddd;
   }
-  
-  .game {
-    display: flex;
-    flex-direction: row;
-  }
+
   
   .game-info {
     margin-left: 20px;
