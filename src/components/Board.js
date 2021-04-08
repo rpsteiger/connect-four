@@ -1,6 +1,8 @@
 import React from 'react'
 import Square from './Square'
 import { checkIfWinningState, columns } from '../connectFour.js'
+import { range } from '../functionalJS'
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Board extends React.Component {
     constructor(props) {
@@ -30,7 +32,7 @@ export default class Board extends React.Component {
     }
 
     renderSquare = (x, y) => (
-        <Square
+        <Square key={uuidv4()}
             value={this.state.squares[y][x]}
             onClick={() => this.handleClick(x, y)}
         />
@@ -48,60 +50,13 @@ export default class Board extends React.Component {
         return (
             <div>
                 <div className="status">{status}</div>
-                <div className="board-row">
-                    {this.renderSquare(0, 0)}
-                    {this.renderSquare(1, 0)}
-                    {this.renderSquare(2, 0)}
-                    {this.renderSquare(3, 0)}
-                    {this.renderSquare(4, 0)}
-                    {this.renderSquare(5, 0)}
-                    {this.renderSquare(6, 0)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(0, 1)}
-                    {this.renderSquare(1, 1)}
-                    {this.renderSquare(2, 1)}
-                    {this.renderSquare(3, 1)}
-                    {this.renderSquare(4, 1)}
-                    {this.renderSquare(5, 1)}
-                    {this.renderSquare(6, 0)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(0, 2)}
-                    {this.renderSquare(1, 2)}
-                    {this.renderSquare(2, 2)}
-                    {this.renderSquare(3, 2)}
-                    {this.renderSquare(4, 2)}
-                    {this.renderSquare(5, 2)}
-                    {this.renderSquare(6, 2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(0, 3)}
-                    {this.renderSquare(1, 3)}
-                    {this.renderSquare(2, 3)}
-                    {this.renderSquare(3, 3)}
-                    {this.renderSquare(4, 3)}
-                    {this.renderSquare(5, 3)}
-                    {this.renderSquare(6, 3)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(0, 4)}
-                    {this.renderSquare(1, 4)}
-                    {this.renderSquare(2, 4)}
-                    {this.renderSquare(3, 4)}
-                    {this.renderSquare(4, 4)}
-                    {this.renderSquare(5, 4)}
-                    {this.renderSquare(6, 4)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(0, 5)}
-                    {this.renderSquare(1, 5)}
-                    {this.renderSquare(2, 5)}
-                    {this.renderSquare(3, 5)}
-                    {this.renderSquare(4, 5)}
-                    {this.renderSquare(5, 5)}
-                    {this.renderSquare(6, 5)}
-                </div>
+                {range(0, 6).map((index) => (
+                    <div key={uuidv4()} className="board-row">
+                        {range(0, 7).map((innerIndex) =>
+                            this.renderSquare(innerIndex, index)
+                        )}
+                    </div>
+                ))}
             </div>
         )
     }
