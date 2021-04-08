@@ -17,6 +17,10 @@ export default class Board extends React.Component {
         return Array(6).fill(null).map(() => Array(7).fill(null))
     }
 
+    resetClickHandler = event => {
+        this.setState({ squares: this.createArray() })
+    }
+
     handleClick(x, y) {
         const squares = this.state.squares.slice();
 
@@ -57,6 +61,7 @@ export default class Board extends React.Component {
                         )}
                     </div>
                 ))}
+                <button onClick={this.resetClickHandler}>Reset</button>
             </div>
         )
     }
